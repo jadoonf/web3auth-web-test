@@ -1,6 +1,7 @@
 name: Update and Build examples on release
 
 on:
+  workflow_dispatch:
   release:
     types: [published]
 jobs:
