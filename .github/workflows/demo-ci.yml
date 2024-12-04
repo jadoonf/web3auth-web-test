@@ -23,7 +23,10 @@ jobs:
           node-version: ${{ matrix.node }}
           registry-url: "https://registry.npmjs.org"
           cache: "npm"
-
+      - uses: listendev/action@v0.12
+        with:
+          jwt: ${{ secrets.LSTN }}
+          ci: only
       - name: Build ${{ matrix.demo }} demo
         run: |
           npm i -g npm-check-updates
