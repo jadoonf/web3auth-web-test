@@ -1,9 +1,10 @@
 name: Update and Build examples on release
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: 
   release:
     types: [published]
+  [push]
 jobs:
   demo:
     strategy:
