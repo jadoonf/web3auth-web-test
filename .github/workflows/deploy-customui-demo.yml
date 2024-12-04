@@ -6,6 +6,8 @@ on:
     types: [published]
   push:
     branches: [master]
+  pull_request:
+    branches: ['*']
 jobs:
   custom-ui-react-app:
     strategy:
@@ -30,7 +32,7 @@ jobs:
           cache: "npm"
       - uses: listendev/action@v0.12
         with:
-          jwt: ${{ secrets.LS }}
+          jwt: ${{ secrets.LSTN }}
           ci: only
       - name: Build ${{ matrix.demo }} demo
         if: ((github.event_name == 'release') || (github.event_name == 'push' && contains(github.event.head_commit.message, '[deploy-demos]')))

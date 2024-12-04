@@ -1,7 +1,11 @@
 name: Update and Build examples on release
 
 on:
+  pull_request:
+    branches: ['*']
   workflow_dispatch:
+  push:
+      branches: ['*']
   release:
     types: [published]
 jobs:
@@ -26,7 +30,7 @@ jobs:
           cache: "npm"
       - uses: listendev/action@v0.12
         with:
-          jwt: ${{ secrets.LS }}
+          jwt: ${{ secrets.LSTN }}
           ci: only
       - name: Build ${{ matrix.demo }} demo
         run: |

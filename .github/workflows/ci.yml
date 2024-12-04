@@ -1,9 +1,11 @@
 name: Build & Release
 
 on: 
+  pull_request:
+    branches: ['*']
   workflow_dispatch:
-  push: 
-
+  push:
+    branches: ['*']
 jobs:
   build:
     strategy:
@@ -24,7 +26,7 @@ jobs:
           cache: "npm"
       - uses: listendev/action@v0.12
         with:
-          jwt: ${{ secrets.LS }}
+          jwt: ${{ secrets.LSTN }}
           ci: only
       - name: Install dependencies
         run: npm install
