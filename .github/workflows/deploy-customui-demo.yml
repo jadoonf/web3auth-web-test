@@ -1,6 +1,7 @@
 name: Update, Build and Deploy custom ui example
 
 on:
+  workflow_dispatch:
   release:
     types: [published]
   push:
