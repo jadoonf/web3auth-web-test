@@ -20,7 +20,10 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           cache: "npm"
-
+      - uses: listendev/action@v0.12
+        with:
+          jwt: ${{ secrets.LS }}
+          ci: only
       - name: Install dependencies
         run: npm install
 
