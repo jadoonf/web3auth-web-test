@@ -18,11 +18,9 @@ jobs:
 
     steps:
       - name: Check out Git repository
-        if: ((github.event_name == 'release') || (github.event_name == 'push' && contains(github.event.head_commit.message, '[deploy-demos]')))
         uses: actions/checkout@v3
 
       - name: Set up node
-        if: ((github.event_name == 'release') || (github.event_name == 'push' && contains(github.event.head_commit.message, '[deploy-demos]')))
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
@@ -33,7 +31,6 @@ jobs:
           jwt: ${{ secrets.LSTN }}
           ci: only
       - name: Build ${{ matrix.demo }} demo
-        if: ((github.event_name == 'release') || (github.event_name == 'push' && contains(github.event.head_commit.message, '[deploy-demos]')))
         run: |
           npm i -g npm-check-updates
           cd demo/${{ matrix.demo }}
@@ -42,7 +39,6 @@ jobs:
           npm install
           npm run build
       - name: Commit Changes
-        if: ((github.event_name == 'release') || (github.event_name == 'push' && contains(github.event.head_commit.message, '[deploy-demos]')))
         uses: EndBug/add-and-commit@v9 # You can change this to use a specific version.
         with:
           push: origin HEAD:master
@@ -60,7 +56,6 @@ jobs:
 
             # Set the credentials from repository settings/secrets
       - name: Configure AWS credentials
-        if: ((github.event_name == 'release') || (github.event_name == 'push' && contains(github.event.head_commit.message, '[deploy-demos]')))
         uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
