@@ -1,11 +1,12 @@
+
 name: Update, Build and Deploy custom ui example
 
 on:
-  workflow_dispatch:
   release:
     types: [published]
   push:
     branches: [master]
+  workflow_dispatch:
 jobs:
   custom-ui-react-app:
     strategy:
@@ -65,7 +66,6 @@ jobs:
       # Copy the files from build folder to the S3 bucket
       # Upload to S3
       - name: sync s3
-        if: ((github.event_name == 'release') || (github.event_name == 'push' && contains(github.event.head_commit.message, '[deploy-demos]')))
         uses: jakejarvis/s3-sync-action@master
         env:
           SOURCE_DIR: "./demo/custom-ui-react-app/build"
@@ -76,7 +76,6 @@ jobs:
 
       # Invalidate Cloudfront (this action)
       - name: invalidate
-        if: ((github.event_name == 'release') || (github.event_name == 'push' && contains(github.event.head_commit.message, '[deploy-demos]')))
         uses: chaitanyapotti/cloudfront-update-distribution@v2
         with:
           cloudfront-distribution-id: ${{ secrets.AWS_CLOUDFRONT_CORE_DEMO_DISTRIBUTION_ID }}

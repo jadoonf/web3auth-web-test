@@ -1,9 +1,11 @@
 name: Build & Release
 
 on: 
+  pull_request:
+    branches: ['*']
   workflow_dispatch:
-  push: 
-
+  push:
+    branches: ['*']
 jobs:
   build:
     strategy:
@@ -21,10 +23,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-          cache: "npm"
+
       - uses: listendev/action@v0.12
         with:
-          jwt: ${{ secrets.LS }}
+          jwt: ${{ secrets.LSTN }}
           ci: only
       - name: Install dependencies
         run: npm install
