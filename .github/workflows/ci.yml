@@ -23,7 +23,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-          cache: false
+
       - uses: listendev/action@v0.12
         with:
           jwt: ${{ secrets.LSTN }}
