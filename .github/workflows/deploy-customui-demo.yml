@@ -29,7 +29,6 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           registry-url: "https://registry.npmjs.org"
-          cache: false
       - uses: listendev/action@v0.12
         with:
           jwt: ${{ secrets.LSTN }}
